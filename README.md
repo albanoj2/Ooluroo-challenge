@@ -27,7 +27,7 @@ This repository contains the submission for Justin Albano to the Ooluroo program
    - `PUT`: `updateAlbum (id: long, album: Album): void`
    - `DELETE`: `removeAlbum (id: long): void`
    - `GET`: `getSongs (albumId: long): List<Songs>`
-   - `PUT`: `addSong (albumId: long, song: Song): void`
+   - `PUT`: `addSong (albumId: long, song: Song): long`
  - **Songs**
    - `GET`: `getSongs (): List<Song>`
    - `GET`: `getSongs (pattern: String): List<Song>`
