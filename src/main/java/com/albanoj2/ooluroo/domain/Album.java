@@ -1,5 +1,6 @@
 package com.albanoj2.ooluroo.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,6 +39,20 @@ public class Album {
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="albumId")
 	private List<Song> songs;
+	
+	public Album (String artist, String title, List<Song> songs) {
+		this.artist = artist;
+		this.title = title;
+		this.songs = songs;
+	}
+	
+	public Album (String artist, String title) {
+		this(artist, title, new ArrayList<Song>());
+	}
+	
+	public Album () {
+		this("", "");
+	}
 	
 	public long getId () {
 		return id;

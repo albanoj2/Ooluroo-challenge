@@ -33,6 +33,16 @@ public class Song {
 	@Column
 	@NotNull
 	private long albumId;
+	
+	public Song (String title, int lengthInSeconds, long albumId) {
+		this.title = title;
+		this.lengthInSeconds = lengthInSeconds;
+		this.albumId = albumId;
+	}
+	
+	public Song (String title, int lengthInSeconds) {
+		this(title, lengthInSeconds, 0);
+	}
 
 	public long getId () {
 		return id;

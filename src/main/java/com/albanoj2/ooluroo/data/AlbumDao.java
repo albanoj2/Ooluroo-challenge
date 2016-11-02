@@ -26,7 +26,6 @@ public class AlbumDao extends AbstractDAO<Album> {
 	 */
 	public AlbumDao (SessionFactory sessionFactory, SongDao songDao) {
 		super(sessionFactory);
-		System.out.println(sessionFactory);
 	}
 
 	public long create (Album album) {
@@ -34,7 +33,7 @@ public class AlbumDao extends AbstractDAO<Album> {
 	}
 	
 	public Album find (long id) {
-		return this.get(id);
+		return this.currentSession().get(Album.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")

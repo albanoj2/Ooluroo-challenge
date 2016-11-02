@@ -6,4 +6,4 @@ database:
   driverClass: com.mysql.jdbc.Driver
   user: ooluroo
   password: ooluroo
-  url: jdbc:mysql://localhost:3306/ooluroochallenge
+  url: jdbc:mysql://localhost:3306/ooluroochallenge_test
