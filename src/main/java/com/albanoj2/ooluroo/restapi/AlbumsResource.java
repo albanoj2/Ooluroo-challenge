@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.albanoj2.ooluroo.data.AlbumDao;
 import com.albanoj2.ooluroo.domain.Album;
 import com.albanoj2.ooluroo.domain.Song;
 
@@ -24,6 +25,12 @@ import com.albanoj2.ooluroo.domain.Song;
 @Path("/albums")
 @Produces(MediaType.APPLICATION_JSON)
 public class AlbumsResource {
+	
+	private AlbumDao dao;
+	
+	public AlbumsResource (AlbumDao dao) {
+		this.dao = dao;
+	}
 
 	@GET
 	public List<Album> getAlbums (@QueryParam("filter") Optional<String> filter) {

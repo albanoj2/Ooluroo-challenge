@@ -46,10 +46,4 @@ public class SongsResource {
 	public void removeSong (long id) {
 		
 	}
-	
-//	GET: getSongs (): List<Song>
-//	GET: getSongs (pattern: String): List<Song>
-//	GET: getSong (id: long): Song
-//	PUT: updateSong (id: long, song: Song): void
-//	DELETE: removeSong (id: long): void
 }

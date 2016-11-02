@@ -2,16 +2,52 @@ package com.albanoj2.ooluroo.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+
 /**
  * TODO Class documentation
  *
  * @author Justin Albano
  */
+@Entity
+@Table(name = "Albums")
 public class Album {
 
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column
+	private long id;
+	
+	@Column
+	@NotNull
 	private String artist;
+	
+	@Column
+	@NotNull
 	private String title;
+	
+//	@ElementCollection(targetClass=Song.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Song.class)
+	@OrderColumn
+    @JoinTable(joinColumns = { @JoinColumn(name = "albumId") })
 	private List<Song> songs;
+	
+	public long getId () {
+		return id;
+	}
 
 	public String getArtist () {
 		return artist;

@@ -1,15 +1,42 @@
 package com.albanoj2.ooluroo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 /**
  * TODO Class documentation
  *
  * @author Justin Albano
  */
+@Entity
+@Table(name = "Songs")
 public class Song {
 	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column
+	private long id;
+	
+	@Column
+	@NotNull
 	private String title;
+	
+	@Column
+	@NotNull
 	private int lengthInSeconds;
+	
+	@Column
+	@NotNull
+	private long albumId;
 
+	public long getId () {
+		return id;
+	}
 
 	public String getTitle () {
 		return title;
@@ -26,7 +53,13 @@ public class Song {
 	public void setLengthInSeconds (int lengthInSeconds) {
 		this.lengthInSeconds = lengthInSeconds;
 	}
-	
-	
+
+	public long getAlbumId () {
+		return albumId;
+	}
+
+	public void setAlbumId (long albumId) {
+		this.albumId = albumId;
+	}
 
 }
