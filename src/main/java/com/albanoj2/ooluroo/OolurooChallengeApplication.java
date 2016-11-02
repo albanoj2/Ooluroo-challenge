@@ -1,6 +1,7 @@
 package com.albanoj2.ooluroo;
 
 import com.albanoj2.ooluroo.restapi.AlbumsResource;
+import com.albanoj2.ooluroo.restapi.SongsResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -24,9 +25,11 @@ public class OolurooChallengeApplication extends Application<OolurooChallengeCon
 	public void run (OolurooChallengeConfiguration config, Environment environment) throws Exception {
 		// Create the resources
 		AlbumsResource albumsResource = new AlbumsResource();
+		SongsResource songsResource = new SongsResource();
 		
 		// Register the resources
 		environment.jersey().register(albumsResource);
+		environment.jersey().register(songsResource);
 	}
 
 }
