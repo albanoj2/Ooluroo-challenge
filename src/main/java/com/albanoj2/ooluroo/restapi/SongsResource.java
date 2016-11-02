@@ -39,18 +39,18 @@ public class SongsResource {
 	@GET
 	@Path("/{id}")
 	public Song getSong (@PathParam("id") long id) {
-		return null;
+		return this.dao.find(id);
 	}
 	
 	@PUT
 	@Path("/{id}")
 	public void updateSong (@PathParam("id") long id, Song song) {
-		
+		this.dao.update(song);
 	}
 	
 	@DELETE
 	@Path("/{id}")
 	public void removeSong (long id) {
-		
+		this.dao.deleteById(id);
 	}
 }

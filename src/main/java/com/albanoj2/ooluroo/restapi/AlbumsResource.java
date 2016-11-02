@@ -37,8 +37,6 @@ public class AlbumsResource {
 	@UnitOfWork
 	public List<Album> getAlbums (@QueryParam("filter") Optional<String> pattern) {
 		
-		System.out.println(pattern.isPresent());
-		
 		if (pattern.isPresent()) {
 			// A pattern is provided
 			return this.dao.findByPattern(pattern.get());
