@@ -1,15 +1,16 @@
-create table Albums (
+CREATE TABLE Albums (
 	id INT NOT NULL auto_increment,
-	artist VARCHAR(20) default NULL,
-	title VARCHAR(20) default NULL,
+	artist VARCHAR(255) default NULL,
+	title VARCHAR(255) default NULL,
 	PRIMARY KEY (id)
 );
 
-create table Songs (
+CREATE TABLE Songs (
 	id INT NOT NULL auto_increment,
-	title VARCHAR(20) default NULL,
+	title VARCHAR(255) default NULL,
 	lengthInSeconds INT default NULL,
 	idx INT NOT NULL,
 	albumId INT NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (albumId) REFERENCES Albums(id)
 );

@@ -17,6 +17,8 @@ import com.albanoj2.ooluroo.data.AlbumDao;
 import com.albanoj2.ooluroo.domain.Album;
 import com.albanoj2.ooluroo.domain.Song;
 
+import io.dropwizard.hibernate.UnitOfWork;
+
 /**
  * TODO Class documentation
  *
@@ -33,40 +35,56 @@ public class AlbumsResource {
 	}
 
 	@GET
-	public List<Album> getAlbums (@QueryParam("filter") Optional<String> filter) {
-		return new ArrayList<Album>();
+	@UnitOfWork
+	public List<Album> getAlbums (@QueryParam("filter") Optional<String> pattern) {
+		
+		if (pattern.isPresent()) {
+			// A pattern is provided
+			return this.dao.findByPattern(pattern.get());
+		}
+		else {
+			// No pattern is present
+			return this.dao.findAll();
+		}
 	}
 	
 	@PUT
+	@UnitOfWork
 	public long addAlbum (Album album) {
-		return -1;
+		return dao.create(album);
 	}
 	
 	@GET
 	@Path("/{id}")
+	@UnitOfWork
 	public Album getAlbum (@PathParam("id") long id) {
-		return new Album();
+		return this.dao.find(id);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@UnitOfWork
 	public void updateAlbum (@PathParam("id")long id, Album album) {
+		this.dao.update(album);
 	}
 	
 	@DELETE
 	@Path("/{id}")
+	@UnitOfWork
 	public void removeAlbum (@PathParam("id") long id) {
-		
+		this.dao.deleteById(id);
 	}
 	
 	@GET
 	@Path("/{id}/songs")
+	@UnitOfWork
 	public List<Song> getSongs (@PathParam("id") long id) {
 		return new ArrayList<Song>();
 	}
 	
 	@PUT
 	@Path("/{id}/songs")
+	@UnitOfWork
 	public long addSong (@PathParam("id") long id, Song song) {
 		return -1;
 	}
