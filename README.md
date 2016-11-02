@@ -39,3 +39,23 @@ The following are the simplifying assumptions made due to the time constraint of
  - **Increased security**: Since patterns can be used to search for albums and songs, a great deal of security would be needed. For example, the pattern supplied in the URL of an API call should be santized to ensure that it does not include SQL injection payloads or other types of malicious information. In addition, a cryptographic API key should be introduced that restricts access to the API to approved entities. These entities can obtain a signed certificate from the service provider and then include the certificate in the API calls that they make. For example, instead of simply making a `GET` call such as `/albums`, the call would be required to include the API key: `/albums?key=eb72c3541ce3eae9992b0cf506950ce98a8483a6a97dcb111e5547f03a1758d3`. This creates a stateless means of authenticating API access; if instead, a more connection oriented API were used, the key may be provided during handshaking and may be left off of API calls for the duration of the connection. 
  
  The use of a key also unique identifies the accessor of the API, allowing useful metrics to be gathered (how many of each call were made by an acessor) or limit the number of calls that an accessor can make. For example, a free account may only be able to make 60 calls per minute, while a paid account may make 600 calls per minute.
+ 
+## Test Cases
+The following tests cases are by no means a comprehensive set of tests, but given the time, targets the basic functionality that is expected from a first iteration of the music application.
+
+| Test Case        | Expected Result  |
+|:-------------|:-------------|
+| PUT album &rarr; GET album | Ensure created album can be obtained |
+| PUT album &rarr; DELETE album &rarr; GET album | Ensure created (then deleted album) cannot be obtained |
+| PUT album &rarr; GET album (matching pattern) | Ensure created album can be obtained |
+| PUT album &rarr; GET album (non-matching pattern) | Ensure created album cannot be obtained | 
+| PUT album &rarr; GET ALL albums | Ensure newly created album is in list |
+| PUT album song &rarr; GET album song | Ensure created song can be obtained |
+| PUT album song &rarr; DELETE album song &rarr; GET album song | Ensure created song cannot be obtained |
+| PUT existing album (with changes) &rarr; GET album | Ensure that the album is updated |
+| PUT existing song (with changes) &rarr; GET song | Ensure that the song is updated |
+| PUT album son &rarr; GET ALL songs | Ensure created song is in list |
+| PUT song &rarr; DELETE song &rarr; GET ALL songs | Ensure created song is not present in list |
+| PUT song &rarr; GET song (matching pattern) | Ensure created song is found in list |
+| PUT song &rarr; GET song (non-matching pattern) | Ensure created song is not found in list |
+
