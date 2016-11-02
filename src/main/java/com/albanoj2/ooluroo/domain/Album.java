@@ -36,13 +36,7 @@ public class Album {
 	@NotNull
 	private String title;
 	
-//	@ElementCollection(targetClass=Song.class)
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="albumId")
-//	@OrderColumn(name = "idx")
-//    @JoinTable(name = "Albums_Songs",
-//    	joinColumns = { @JoinColumn(name = "albumId") },
-//    	inverseJoinColumns = { @JoinColumn(name = "songId") }
-//    )
 	private List<Song> songs;
 	
 	public long getId () {
@@ -73,5 +67,7 @@ public class Album {
 		this.songs = songs;
 	}
 	
-	
+	public void addSong (Song song) {
+		this.songs.add(song);
+	}
 }

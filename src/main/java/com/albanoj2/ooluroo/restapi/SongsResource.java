@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.albanoj2.ooluroo.data.SongDao;
 import com.albanoj2.ooluroo.domain.Song;
 
 /**
@@ -23,6 +24,12 @@ import com.albanoj2.ooluroo.domain.Song;
 @Path("/songs")
 @Produces(MediaType.APPLICATION_JSON)
 public class SongsResource {
+	
+	private SongDao dao;
+	
+	public SongsResource (SongDao dao) {
+		this.dao = dao;
+	}
 
 	@GET
 	public List<Song> getSongs (@QueryParam("filter") Optional<String> filter) {

@@ -1,6 +1,5 @@
 package com.albanoj2.ooluroo.restapi;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +36,8 @@ public class AlbumsResource {
 	@GET
 	@UnitOfWork
 	public List<Album> getAlbums (@QueryParam("filter") Optional<String> pattern) {
+		
+		System.out.println(pattern.isPresent());
 		
 		if (pattern.isPresent()) {
 			// A pattern is provided
@@ -79,13 +80,13 @@ public class AlbumsResource {
 	@Path("/{id}/songs")
 	@UnitOfWork
 	public List<Song> getSongs (@PathParam("id") long id) {
-		return new ArrayList<Song>();
+		return this.dao.find(id).getSongs();
 	}
 	
 	@PUT
 	@Path("/{id}/songs")
 	@UnitOfWork
-	public long addSong (@PathParam("id") long id, Song song) {
-		return -1;
+	public long addSong (@PathParam("id") long albumId, Song song) {
+		return this.dao.addSong(albumId, song);
 	}
 }

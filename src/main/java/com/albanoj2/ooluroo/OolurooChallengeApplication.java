@@ -1,6 +1,7 @@
 package com.albanoj2.ooluroo;
 
 import com.albanoj2.ooluroo.data.AlbumDao;
+import com.albanoj2.ooluroo.data.SongDao;
 import com.albanoj2.ooluroo.domain.Album;
 import com.albanoj2.ooluroo.domain.Song;
 import com.albanoj2.ooluroo.restapi.AlbumsResource;
@@ -33,9 +34,13 @@ public class OolurooChallengeApplication extends Application<OolurooChallengeCon
 
 	@Override
 	public void run (OolurooChallengeConfiguration config, Environment environment) throws Exception {
+		// Create the Data Access Objects (DAOs)
+		SongDao songDao = new SongDao(hibernate.getSessionFactory());
+		AlbumDao albumDao = new AlbumDao(hibernate.getSessionFactory(), songDao);
+		
 		// Create the resources
-		AlbumsResource albumsResource = new AlbumsResource(new AlbumDao(hibernate.getSessionFactory()));
-		SongsResource songsResource = new SongsResource();
+		AlbumsResource albumsResource = new AlbumsResource(albumDao);
+		SongsResource songsResource = new SongsResource(songDao);
 
 		// Register the resources
 		environment.jersey().register(albumsResource);
