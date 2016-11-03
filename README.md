@@ -3,7 +3,7 @@ This repository contains the submission for Justin Albano to the Ooluroo program
 
 ## Notes
  - SQL schema contained in `src/main/resources/schema.sql`
- - All notes and hand-drawn designs contained in `doc/`
+ - All notes and hand-drawn designs contained in `doc/`; these notes may not be as up-to-date as the source code and should only be viewed as preliminary starting points for the design of the system; where conflicts arise, the source code should be viewed as the most up-to-date reference
 
 ## RESTful Endpoints
 | Method        | URI           | Description  |
