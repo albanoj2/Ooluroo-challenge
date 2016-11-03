@@ -54,7 +54,7 @@ The following tests cases are by no means a comprehensive set of tests, but give
 | PUT album song &rarr; DELETE song &rarr; GET album song | Ensure created song cannot be obtained |
 | PUT existing album (with changes) &rarr; GET album | Ensure that the album is updated |
 | PUT existing song (with changes) &rarr; GET song | Ensure that the song is updated |
-| PUT album son &rarr; GET ALL songs | Ensure created song is in list |
+| PUT album song &rarr; GET ALL songs | Ensure created song is in list |
 | PUT song &rarr; DELETE song &rarr; GET ALL songs | Ensure created song is not present in list |
 | PUT song &rarr; GET song (matching pattern) | Ensure created song is found in list |
 | PUT song &rarr; GET song (non-matching pattern) | Ensure created song is not found in list |
