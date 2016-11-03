@@ -1,6 +1,10 @@
 # Ooluroo Challenge
 This repository contains the submission for Justin Albano to the Ooluroo programming challenge presented by Corey Wendling on Nov. 1, 2016. This submission contains all source code, artifacts and documents, and schemas required to comprehensively solve the presented problem.
 
+## Notes
+ - SQL schema contained in `src/main/resources/schema.sql`
+ - All notes and hand-drawn designs contained in `doc/`
+
 ## RESTful Endpoints
 | Method        | URI           | Description  |
 |:-------------|:-------------|:-----|
