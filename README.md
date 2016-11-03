@@ -12,11 +12,11 @@ This repository contains the submission for Justin Albano to the Ooluroo program
 | `DELETE` | `/albums/{id}` | Deletes the album corresponding to the supplied ID |
 | `GET` | `/albums/{album_id}/songs` | Returns a list of all songs associated with the album corresponding to the supplied album ID |
 | `PUT` | `/albums/{album_id}/songs` | Creates a new song with the supplied characteristics and adds it to the album correspond to the supplied album ID; returns the ID of the newly created album; the album ID of the supplied song is ignored (the `{album_id}` is used instead) |
+| `DELETE` | `/albums/{album_id}/songs/{song_id}` | Deletes the song corresponding to the supplied song ID from the album corresponding to the supplied album ID (also deletes the song from the database) |
 | `GET` | `/songs` | Returns a list of all existing songs |
 | `GET` | `/songs?filter={pattern}` | Returns a list of all existing songs whose title conforms to the supplied pattern |
 | `GET` | `/songs/{id}` | Returns a representation of the song corresponding to the supplied ID |
 | `PUT` | `/songs/{id}` | Updates the data associated with the song corresponding to the supplied ID |
-| `DELETE` | `/songs/{song_id}` | Deletes the song corresponding to the supplied ID |
 
 ## With More Time
 The following are the simplifying assumptions made due to the time constraint of the project, as well as the vision that the project could include, given more time were provided.
