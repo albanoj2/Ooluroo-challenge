@@ -25,11 +25,12 @@ import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 
 /**
- * TODO Class documentation
+ * Test fixture containing the acceptance tests for the alumb and song RESTful
+ * API endpoints.
  *
  * @author Justin Albano
  */
-public class AlbumsResourceTest {
+public class AcceptanceTest {
 
 	private Client client = new JerseyClientBuilder().build();
 
@@ -347,7 +348,7 @@ public class AlbumsResourceTest {
 		// ensure that only one such entry is found
 		assertThat(foundSongs.stream().filter(a -> this.getId(a).equals(createdSongId)).collect(Collectors.toList()).size()).isEqualTo(1);
 	}
-	
+
 	@Test
 	@SuppressWarnings("unchecked")
 	public void testPutNewAlbumSongDeleteSongEnsureSongNotObtainedThroughGetOfAllSongs () {
@@ -373,7 +374,7 @@ public class AlbumsResourceTest {
 
 		// Ensure the PUT was successful
 		assertThat(creationSongResponse.getStatus()).isEqualTo(200);
-		
+
 		// Delete the song
 		this.delete("/songs/" + createdSongId);
 
@@ -412,13 +413,14 @@ public class AlbumsResourceTest {
 		assertThat(creationSongResponse.getStatus()).isEqualTo(200);
 
 		// Obtain the created song information through a GET
-		List<Map<String, Object>> foundSongs = (List<Map<String, Object>>) this.get("/songs?filter=" + newSong.getTitle().substring(5, 10), List.class);
+		List<Map<String, Object>> foundSongs = (List<Map<String, Object>>) this.get("/songs?filter=" + newSong.getTitle().substring(5, 10),
+			List.class);
 
 		// Filter the list, looking for an song entry with matching ID, and
 		// ensure that only one such entry is found
 		assertThat(foundSongs.stream().filter(a -> this.getId(a).equals(createdSongId)).collect(Collectors.toList()).size()).isEqualTo(1);
 	}
-	
+
 	@Test
 	@SuppressWarnings("unchecked")
 	public void testPutNewAlbumSongEnsureSongNotObtainedThroughGetOfAllSongsWithNonMatchingPattern () {

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * TODO Class documentation
+ * A domain object representing an album.
  *
  * @author Justin Albano
  */

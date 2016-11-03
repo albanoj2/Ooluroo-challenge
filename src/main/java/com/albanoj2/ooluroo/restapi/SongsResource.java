@@ -18,24 +18,45 @@ import com.albanoj2.ooluroo.domain.Song;
 import io.dropwizard.hibernate.UnitOfWork;
 
 /**
- * TODO Class documentation
+ * Resource class representing the RESTful API endpoints pertaining to a song
+ * resource.
  *
  * @author Justin Albano
  */
 @Path("/songs")
 @Produces(MediaType.APPLICATION_JSON)
 public class SongsResource {
-	
+
+	/**
+	 * Data Access Object (DAO) that interfaces with persistent storage on
+	 * behalf of this resource.
+	 */
 	private SongDao dao;
-	
+
+	/**
+	 * @param dao
+	 *            Data Access Object (DAO) that interfaces with persistent
+	 *            storage on behalf of this resource.
+	 */
 	public SongsResource (SongDao dao) {
 		this.dao = dao;
 	}
 
+	/**
+	 * Obtains a list of all existing songs that match the supplied title
+	 * pattern, if one is provided.
+	 * 
+	 * @param pattern
+	 *            A pattern that filters the list of songs by titles similar to
+	 *            the pattern.
+	 * @return
+	 * 		A list of all existing songs that match the supplied title
+	 *         pattern, if one is provided.
+	 */
 	@GET
 	@UnitOfWork
 	public List<Song> getSongs (@QueryParam("filter") Optional<String> pattern) {
-		
+
 		if (pattern.isPresent()) {
 			// A pattern is provided
 			return this.dao.findByPattern(pattern.get());
@@ -45,21 +66,44 @@ public class SongsResource {
 			return this.dao.findAll();
 		}
 	}
-	
+
+	/**
+	 * Obtains the song corresponding to the supplied ID.
+	 * 
+	 * @param id
+	 *            The ID of the song to obtain.
+	 * @return
+	 * 		The song corresponding to the supplied ID; if no song is found,
+	 *         null is returned.
+	 */
 	@GET
 	@Path("/{id}")
 	@UnitOfWork
 	public Song getSong (@PathParam("id") long id) {
 		return this.dao.find(id);
 	}
-	
+
+	/**
+	 * Updates a song.
+	 * 
+	 * @param id
+	 *            The ID of the song to update.
+	 * @param song
+	 *            The updated song.
+	 */
 	@PUT
 	@Path("/{id}")
 	@UnitOfWork
 	public void updateSong (@PathParam("id") long id, Song song) {
 		this.dao.update(song);
 	}
-	
+
+	/**
+	 * Removes the song corresponding to the supplied song ID.
+	 * 
+	 * @param id
+	 *            The ID of the song to remove.
+	 */
 	@DELETE
 	@Path("/{id}")
 	@UnitOfWork

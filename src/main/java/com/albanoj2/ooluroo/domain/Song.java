@@ -9,39 +9,39 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * TODO Class documentation
+ * Domain class representing a song.
  *
  * @author Justin Albano
  */
 @Entity
 @Table(name = "Songs")
 public class Song {
-	
+
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private long id;
-	
+
 	@Column
 	@NotNull
 	private String title;
-	
+
 	@Column
 	@NotNull
 	private int lengthInSeconds;
-	
+
 	@Column
 	private long albumId;
-	
+
 	public Song (String title, int lengthInSeconds, long albumId) {
 		this.title = title;
 		this.lengthInSeconds = lengthInSeconds;
 		this.albumId = albumId;
 	}
-	
+
 	public Song (String title, int lengthInSeconds) {
 		this(title, lengthInSeconds, 0);
-	}	
+	}
 
 	public Song () {
 		this("", 0);
