@@ -26,6 +26,7 @@ public class AlbumDao extends AbstractDAO<Album> {
 	 */
 	public AlbumDao (SessionFactory sessionFactory, SongDao songDao) {
 		super(sessionFactory);
+		this.songDao = songDao;
 	}
 
 	public long create (Album album) {
@@ -69,6 +70,9 @@ public class AlbumDao extends AbstractDAO<Album> {
 		
 		// Retrieve the album
 		Album album = this.find(albumId);
+		
+		// Set the album ID of the song
+		song.setAlbumId(album.getId());
 		
 		// Persist the song
 		long createdSongId = this.songDao.create(song);

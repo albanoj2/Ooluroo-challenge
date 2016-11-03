@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
-import com.albanoj2.ooluroo.domain.Album;
 import com.albanoj2.ooluroo.domain.Song;
 
 import io.dropwizard.hibernate.AbstractDAO;
@@ -31,14 +30,14 @@ public class SongDao extends AbstractDAO<Song> {
 	}
 	
 	public Song find (long id) {
-		return this.get(id);
+		return this.currentSession().get(Song.class, id);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Song> findByPattern (String pattern) {
 		
 		// Create criterion for the "like" query
-		Criteria criteria = this.currentSession().createCriteria(Album.class);
+		Criteria criteria = this.currentSession().createCriteria(Song.class);
 		
 		// Append the "like" to match strings in the title of the song
 		criteria.add(Restrictions.like("title", pattern, MatchMode.ANYWHERE));

@@ -1,6 +1,5 @@
 package com.albanoj2.ooluroo.restapi;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.albanoj2.ooluroo.data.SongDao;
 import com.albanoj2.ooluroo.domain.Song;
+
+import io.dropwizard.hibernate.UnitOfWork;
 
 /**
  * TODO Class documentation
@@ -32,25 +33,37 @@ public class SongsResource {
 	}
 
 	@GET
-	public List<Song> getSongs (@QueryParam("filter") Optional<String> filter) {
-		return new ArrayList<Song>();
+	@UnitOfWork
+	public List<Song> getSongs (@QueryParam("filter") Optional<String> pattern) {
+		
+		if (pattern.isPresent()) {
+			// A pattern is provided
+			return this.dao.findByPattern(pattern.get());
+		}
+		else {
+			// No pattern is present
+			return this.dao.findAll();
+		}
 	}
 	
 	@GET
 	@Path("/{id}")
+	@UnitOfWork
 	public Song getSong (@PathParam("id") long id) {
 		return this.dao.find(id);
 	}
 	
 	@PUT
 	@Path("/{id}")
+	@UnitOfWork
 	public void updateSong (@PathParam("id") long id, Song song) {
 		this.dao.update(song);
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public void removeSong (long id) {
+	@UnitOfWork
+	public void removeSong (@PathParam("id") long id) {
 		this.dao.deleteById(id);
 	}
 }

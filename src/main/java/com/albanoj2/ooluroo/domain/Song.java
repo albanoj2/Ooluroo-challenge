@@ -31,7 +31,6 @@ public class Song {
 	private int lengthInSeconds;
 	
 	@Column
-	@NotNull
 	private long albumId;
 	
 	public Song (String title, int lengthInSeconds, long albumId) {
@@ -42,6 +41,10 @@ public class Song {
 	
 	public Song (String title, int lengthInSeconds) {
 		this(title, lengthInSeconds, 0);
+	}	
+
+	public Song () {
+		this("", 0);
 	}
 
 	public long getId () {
